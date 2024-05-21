@@ -1,2 +1,10 @@
-# HT_Problem_Solving
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# 
+# 백준 & 프로그래머스 문제 풀이 목록
+
+프로그래머스의 경우, 푼 문제 목록에 대한 마이그레이션이 필요합니다.
+
+## 📚 백준
+### 🚀 Gold
+| 문제번호 | 링크 |
+| ----- | ----- |
+|1516. 게임 개발|[링크](./%EB%B0%B1%EC%A4%80/Gold/1516.%E2%80%85%EA%B2%8C%EC%9E%84%E2%80%85%EA%B0%9C%EB%B0%9C/README.md)|
