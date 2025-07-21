@@ -9,34 +9,27 @@ class Main {
         Main.solve();
     }
 
-    public static StringTokenizer tokenize(String input){
+    public static StringTokenizer tokenize(String input) {
         if (input.equals("0 0 0")) return null;
         return new StringTokenizer(input);
     }
 
-    public static Boolean evaluate(int a, int b, int c){
+    public static Boolean evaluate(int a, int b, int c) {
         ArrayList<Integer> list = new ArrayList<>();
-        int one_side = 0, two_side = 0;
-
         list.add(a); list.add(b); list.add(c);
 
         Integer max = Math.max(a, Math.max(b, c));
-        one_side = max * max;
         list.remove(max);
 
-        two_side = list.get(0) * list.get(0) + list.get(1) * list.get(1);
-
-        return one_side == two_side;
+        return max * max == list.get(0) * list.get(0) + list.get(1) * list.get(1);
     }
-
 
     public static void solve() throws IOException {
 
         StringBuilder sb = new StringBuilder();
+        StringTokenizer tokenizer;
 
-        while (true) {
-            StringTokenizer tokenizer = tokenize(br.readLine());
-            if (tokenizer == null) break;
+        while ( ( tokenizer = tokenize(br.readLine()) ) != null ) {
 
             int a = Integer.parseInt(tokenizer.nextToken());
             int b = Integer.parseInt(tokenizer.nextToken());
