@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +7,6 @@ import java.util.Objects;
 
 class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static char[] numberArray;
     static int numberLength, pointer;
 
     public static void main(String[] args) throws IOException {
@@ -25,12 +25,11 @@ class Main {
     }
 
     public static boolean judgePalindromic(String number) {
-        numberArray = number.toCharArray();
-        numberLength = numberArray.length - 1;
+        numberLength = number.length() - 1;
         pointer = 0;
 
         while (pointer <= (numberLength) / 2) {
-            if (! Objects.equals(numberArray[pointer], numberArray[numberLength - pointer])) {
+            if (! Objects.equals(number.charAt(pointer), number.charAt(numberLength - pointer))) {
                 return false;
             }
             pointer++;
