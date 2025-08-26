@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +15,7 @@ class Node {
 }
 
 class Main {
-    static int N, SIZE = 200001;
+    static int N, SIZE = 200001, HALFSIZE = 100000;
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static Node xHeads[] = new Node[SIZE];    // original value + 100000 = index
 
@@ -36,7 +35,7 @@ class Main {
             x = Integer.parseInt(token.nextToken());
             y = Integer.parseInt(token.nextToken());
 
-            insertNode(x + (SIZE-1)/2, y);
+            insertNode(x + HALFSIZE, y);
         }
     }
 
@@ -69,16 +68,15 @@ class Main {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < SIZE; i++) {
-            if (xHeads[i] == null) continue;
-
             Node currNode = xHeads[i];
+            if (currNode == null) continue;
+
             while(currNode != null) {
-                sb.append(i - (SIZE-1)/2).append(" ").append(currNode.value).append("\n");
+                sb.append(i - HALFSIZE).append(" ").append(currNode.value).append("\n");
                 currNode = currNode.next;
             }
         }
 
         System.out.println(sb);
     }
-
 }
