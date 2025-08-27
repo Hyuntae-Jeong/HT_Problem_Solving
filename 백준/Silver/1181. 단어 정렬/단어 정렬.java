@@ -44,6 +44,10 @@ class Main {
     }
 
     public static void printWords() {
-        for (String word : words) System.out.println(word);
+        StringBuilder sb = new StringBuilder();
+
+        for (String word : words) sb.append(word).append("\n");
+        
+        System.out.println(sb);
     }
 }
