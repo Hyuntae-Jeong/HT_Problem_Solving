@@ -35,7 +35,7 @@ class Main {
 
     public static void startProgress() {
         // tail에서 부터 노드를 하나씩 건너뜀
-        while (curr.next != curr.next.next) {
+        while (curr != curr.next) {
             curr.next = curr.next.next;
             curr = curr.next;
         }
