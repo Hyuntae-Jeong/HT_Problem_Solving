@@ -38,20 +38,22 @@ class Main {
                 queue.add(pos - 1);
             }
 
-            // x + 1 이동
-            if (pos + 1 <= 100_000 && visited[pos + 1] == 0){
-                if(pos + 1 == K) return visited[pos];
-                visited[pos + 1] = visited[pos] + 1;
-                queue.add(pos + 1);
-            }
+            // 수빈이가 이미 동생을 지나쳤다면 더 멀리 갈 필요는 없다
+            if (pos < K) {
+                // x + 1 이동
+                if (pos + 1 <= 100_000 && visited[pos + 1] == 0){
+                    if(pos + 1 == K) return visited[pos];
+                    visited[pos + 1] = visited[pos] + 1;
+                    queue.add(pos + 1);
+                }
 
-            // x * 2 이동
-            if (pos * 2 <= 100_000 && visited[pos * 2] == 0){
-                if(pos * 2 == K) return visited[pos];
-                visited[pos * 2] = visited[pos] + 1;
-                queue.add(pos * 2);
+                // x * 2 이동  (여기서 캐치해야할 조건: x*2면 뒤로는 못가니까!!)
+                if (pos * 2 <= 100_000 && visited[pos * 2] == 0){
+                    if(pos * 2 == K) return visited[pos];
+                    visited[pos * 2] = visited[pos] + 1;
+                    queue.add(pos * 2);
+                }
             }
-
         }
 
         return 0;
