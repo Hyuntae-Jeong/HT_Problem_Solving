@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +24,7 @@ class Main {
         ArrayDeque<Integer> queue = new ArrayDeque<>();
 
         if (N == K) return 0;
+        else if (N > K) return N - K;       // 뒤로 가는게 최선
 
         int pos = N;
         queue.add(pos);
