@@ -7,57 +7,52 @@ import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 class Main {
-    static int N, K;
+    static int N, K, pos;
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int[] visited = new int[100_001];
+    static ArrayDeque<Integer> queue = new ArrayDeque<>();
 
     public static void main(String[] args) throws IOException {
         StringTokenizer token = new StringTokenizer(br.readLine());
         N = Integer.parseInt(token.nextToken());
         K = Integer.parseInt(token.nextToken());
 
-        int step = goFindSister();
-        System.out.println(step);
+        try {
+            goFindSister();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static int goFindSister() {
-        ArrayDeque<Integer> queue = new ArrayDeque<>();
+    public static void goFindSister() throws RuntimeException {
+        if (N >= K) {
+            throw new RuntimeException(String.valueOf(N - K));
+        }
 
-        if (N == K) return 0;
-        else if (N > K) return N - K;       // 뒤로 가는게 최선
-
-        int pos = N;
-        queue.add(pos);
-        visited[pos] = 1;
+        queue.add(N);
+        visited[N] = 1;
 
         while (!queue.isEmpty()) {
             pos = queue.poll();
 
-            // x - 1 이동
-            if (pos - 1 >= 0 && visited[pos - 1] == 0){
-                if(pos - 1 == K) return visited[pos];
-                visited[pos - 1] = visited[pos] + 1;
-                queue.add(pos - 1);
-            }
+            move(pos, pos - 1);
 
-            // 수빈이가 이미 동생을 지나쳤다면 더 멀리 갈 필요는 없다
-            if (pos < K) {
-                // x + 1 이동
-                if (pos + 1 <= 100_000 && visited[pos + 1] == 0){
-                    if(pos + 1 == K) return visited[pos];
-                    visited[pos + 1] = visited[pos] + 1;
-                    queue.add(pos + 1);
-                }
+            if (pos >= K) continue; // 수빈이가 이미 동생을 지나쳤다면 더 멀리 갈 필요는 없다
 
-                // x * 2 이동  (여기서 캐치해야할 조건: x*2면 뒤로는 못가니까!!)
-                if (pos * 2 <= 100_000 && visited[pos * 2] == 0){
-                    if(pos * 2 == K) return visited[pos];
-                    visited[pos * 2] = visited[pos] + 1;
-                    queue.add(pos * 2);
-                }
-            }
+            move(pos, pos + 1);
+            move(pos, pos * 2);
         }
+    }
 
-        return 0;
+    static void move(int pos, int nextPos) {
+        if (nextPos < 0 || nextPos > 100_000) return;
+
+        if (visited[nextPos] == 0){
+            if(nextPos == K) {
+                throw new RuntimeException(String.valueOf(visited[pos]));
+            }
+            visited[nextPos] = visited[pos] + 1;
+            queue.add(nextPos);
+        }
     }
 }
