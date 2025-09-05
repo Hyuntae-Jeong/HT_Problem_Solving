@@ -43,6 +43,7 @@
 |1697. 숨바꼭질|[링크](./%EB%B0%B1%EC%A4%80/Silver/1697.%E2%80%85%EC%88%A8%EB%B0%94%EA%BC%AD%EC%A7%88/README.md)|
 |1764. 듣보잡|[링크](./%EB%B0%B1%EC%A4%80/Silver/1764.%E2%80%85%EB%93%A3%EB%B3%B4%EC%9E%A1/README.md)|
 |1920. 수 찾기|[링크](./%EB%B0%B1%EC%A4%80/Silver/1920.%E2%80%85%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0/README.md)|
+|1927. 최소 힙|[링크](./%EB%B0%B1%EC%A4%80/Silver/1927.%E2%80%85%EC%B5%9C%EC%86%8C%E2%80%85%ED%9E%99/README.md)|
 |19554. Guess the number|[링크](./%EB%B0%B1%EC%A4%80/Silver/19554.%E2%80%85Guess%E2%80%85the%E2%80%85number/README.md)|
 |2164. 카드2|[링크](./%EB%B0%B1%EC%A4%80/Silver/2164.%E2%80%85%EC%B9%B4%EB%93%9C2/README.md)|
 |2578. 빙고|[링크](./%EB%B0%B1%EC%A4%80/Silver/2578.%E2%80%85%EB%B9%99%EA%B3%A0/%EB%B9%99%EA%B3%A0.cc)|
