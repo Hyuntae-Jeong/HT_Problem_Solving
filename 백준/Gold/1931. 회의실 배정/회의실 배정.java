@@ -1,9 +1,11 @@
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 class Meeting implements Comparable<Meeting> {
@@ -18,23 +20,22 @@ class Meeting implements Comparable<Meeting> {
     @Override
     public int compareTo(Meeting o) {
         if (this.end < o.end) return -1;
-        else if (this.end == o.end) {
-            if (this.start < o.start) return -1;
-            else if (this.start > o.start) return 1;
-            else return 0;
-        }
-        else return 1;
+        else if (this.end > o.end) return 1;
+        else return Integer.compare(this.start, o.start);
     }
 
 }
+
 class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int N;
-    static ArrayList<Meeting> meetings;
+//    static ArrayList<Meeting> meetings;
+    static PriorityQueue<Meeting> meetings;
 
     public static void main(String[] args) throws IOException {
         N = Integer.parseInt(br.readLine());
-        meetings = new ArrayList<Meeting>();
+//        meetings = new ArrayList<Meeting>();
+        meetings = new PriorityQueue<>();
 
         getMeetingInfos();
 //        printMeetingInfos();
@@ -45,7 +46,10 @@ class Main {
         int meetingCount = 0;
         int lastEndMeetingTime = 0;
 
-        for (Meeting meeting : meetings) {
+//        for (Meeting meeting : meetings) {
+        while (!meetings.isEmpty()) {
+            Meeting meeting = meetings.poll();
+
             if (meeting.start >= lastEndMeetingTime) {
                 lastEndMeetingTime = meeting.end;
                 meetingCount++;
@@ -56,7 +60,12 @@ class Main {
     }
 
     private static void printMeetingInfos() {
-        for (Meeting meeting : meetings) {
+        /*for (Meeting meeting : meetings) {
+            System.out.println(meeting.start + " , " + meeting.end);
+        }*/
+
+        while (!meetings.isEmpty()){
+            Meeting meeting = meetings.poll();
             System.out.println(meeting.start + " , " + meeting.end);
         }
     }
@@ -69,6 +78,6 @@ class Main {
             meetings.add(new Meeting(Integer.parseInt(token.nextToken()), Integer.parseInt(token.nextToken())));
         }
 
-        Collections.sort(meetings);
+//        Collections.sort(meetings);
     }
 }
