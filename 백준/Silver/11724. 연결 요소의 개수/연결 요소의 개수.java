@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 class Main {
@@ -21,19 +18,13 @@ class Main {
 
         startProcess();
         getAnswer();
-
     }
 
     static void startProcess() throws IOException {
-        StringTokenizer token;
-        int a, b;
-
         for (int i = 0; i < M; i++) {
-            token = new StringTokenizer(br.readLine());
-            a = Integer.parseInt(token.nextToken());
-            b = Integer.parseInt(token.nextToken());
-
-//            System.out.println(a + " <---> " + b);
+            StringTokenizer token = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(token.nextToken());
+            int b = Integer.parseInt(token.nextToken());
 
             if (node[a] == node[b]) {
                 if (node[a] == 0) {
@@ -47,22 +38,18 @@ class Main {
                 node[b] = node[a];
             } else {
                 // a != b && a != 0 && b != 0
-                // compare leader
+                // compare leader & connect
                 if (leaderNode[node[a]] != leaderNode[node[b]]) {
                     leaderNode[node[b]] = leaderNode[node[a]];
                 }
             }
-
-//            System.out.println("node info");
-//            for (int j = 1; j <= N; j++) System.out.printf("%d : %d\n", j, node[j]);
-//
-//            System.out.println("leader info");
-//            for (int j = 1; j <= leaderCount; j++) System.out.printf("%d -> %d\n", j, leaderNode[j]);
-//            System.out.println();
         }
     }
 
-    static void getAnswer() {
+    static void getAnswer() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
+
         boolean[] answer = new boolean[N + 1];
         int count = 0;
 
@@ -77,7 +64,9 @@ class Main {
             if (node[i] == 0) count++;
         }
 
-        System.out.println(count);
-
+        sb.append(count);
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
