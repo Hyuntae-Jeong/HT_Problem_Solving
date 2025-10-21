@@ -18,7 +18,7 @@ class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int N, M;
     static int[][] arr, revArr;
-    static Deque<Point> queue, wallQueue, breakableWallQueue;
+    static Deque<Point> queue, wallQueue;
     static boolean debug = false;
     static int[] dx = {0, -1, 0, 1};
     static int[] dy = {-1, 0, 1, 0};
@@ -27,8 +27,8 @@ class Main {
         StringTokenizer token = new StringTokenizer(br.readLine());
         N = Integer.parseInt(token.nextToken());
         M = Integer.parseInt(token.nextToken());
-        arr = new int[N + 1][M + 1];
-        revArr = new int[N + 1][M + 1];
+        arr = new int[N + 1][M + 1];        // path
+        revArr = new int[N + 1][M + 1];     // reverse path
 
         getInput();
         findPath(arr, 1, 1, N, M);
@@ -49,21 +49,12 @@ class Main {
             /**
              * @case: 벽에 막혀서 도착지점 도달하지 못한 경우
              * @target: 도착지점에 최단거리로 도착할 수 있는 벽 찾기
-             * @condition: 뚫리는 벽의 조건은 4면 중 arr배열 양수인 값 1개 이상과 0인 값 1개 이상 모두 존재
-             * @step
-             * 1. 뚫을 수 있는 벽 필터링 하기
-             * 2. 뚫을 수 있는 벽 없으면 -1 리턴하고, 있으면 breakableWallQueue에 저장
-             * 3. 도착 지점에서 역으로 step 구하고 revArr 배열에 저장하기
-             * 4. breakableWallQueue와 revArr를 활용해서 최단거리 되는 벽 찾기
+             * @condition: 뚫리는 벽의 조건은 4면 중 arr 양수값과 revArr 양수값 모두 존재 (시작점과 끝점에서의 최단거리가 만나는 점)
              */
             int shortestPathAfterBlocked  = goThroughWall(N * M);
 
-            if (shortestPathAfterBlocked == N * M) {
-                System.out.printf("%d", -1);
-            }
-            else {
-                System.out.print(shortestPathAfterBlocked);
-            }
+            if (shortestPathAfterBlocked == N * M) shortestPathAfterBlocked = -1;   // 벽 안 뚫리는 경우
+            System.out.print(shortestPathAfterBlocked);
         }
     }
 
