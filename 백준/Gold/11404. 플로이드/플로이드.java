@@ -5,16 +5,13 @@ class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int N, M;
     static int[][] path;
-    static boolean debug = false;
-    
+
     public static void main(String[] args) throws IOException {
         N = Integer.parseInt(br.readLine());
         M = Integer.parseInt(br.readLine());
         path = new int[N + 1][N + 1];
 
         getInput();
-        if (debug) printPath();
-
         floydWarshall();
         printPath();
     }
@@ -32,12 +29,16 @@ class Main {
     }
 
     static void printPath() {
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                System.out.printf("%d ", path[i][j]);
+                sb.append(path[i][j]).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
         }
+
+        System.out.print(sb);
     }
 
     static void floydWarshall() {
@@ -55,7 +56,6 @@ class Main {
                     }
                 }
             }
-            if (debug) printPath();
         }
     }
 }
