@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,14 +38,11 @@ class Main {
                     stack.pop();
                     sb.append("-\n");
                     x++;
-                } else {
-                    stack.push(counter++);
-                    sb.append("+\n");
+                    continue;
                 }
-            } else {
-                stack.push(counter++);
-                sb.append("+\n");
             }
+            stack.push(counter++);
+            sb.append("+\n");
         }
 
         System.out.print(sb);
