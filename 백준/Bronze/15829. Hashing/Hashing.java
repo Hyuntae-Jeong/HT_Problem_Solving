@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,11 +13,11 @@ class Main {
         String inputString = br.readLine();
         char[] inputs = inputString.toCharArray();
 
-        int ri = 1, hash = 0;
+        long ri = 1, hash = 0;
         for (char letter : inputs) {
             int value = Character.getNumericValue(letter) - 9;
             hash = (hash + value * ri) % M;
-            ri *= r;
+            ri = ri * r % M;
         }
 
         System.out.println(hash);
