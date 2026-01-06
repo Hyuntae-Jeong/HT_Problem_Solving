@@ -118,7 +118,7 @@ class Main {
                 answer.liquid2 = minus[idx];
                 return 0;
             } else {
-                // 이미 검사를 완료한 지점
+                // 예외
                 return 999;
             }
         }
@@ -134,7 +134,6 @@ class Main {
                 answer.liquid1 = posMinValue;
                 answer.liquid2 = positive;
             }
-//            System.out.println("[answer] absValue = " + answer.absValue + " , liquid1 = " + answer.liquid1 + " , liquid2 = " + answer.liquid2);
         }
 
         void printVariables() {
@@ -143,11 +142,12 @@ class Main {
     }
 
     static boolean binarySearch(long positive) {
-        // 하나의 산성용액에 대해 가장 조합이 좋은 염기성용액을 이진탐색을 찾아낸다
-
-        if (endIndexOfMinus < 0) {
-            return false;
-        }
+        /**
+         * 하나의 산성용액에 대해 가장 조합이 좋은 염기성용액을 이진탐색을 찾아낸다
+         */
+        
+        // 음수 용액이 없을 경우 이진 탐색 skip 
+        if (endIndexOfMinus < 0) return false;
 
         SearchData searchData = new SearchData(positive);
         int left = 0, right = endIndexOfMinus, mid;
@@ -166,19 +166,11 @@ class Main {
                     break;
                 case 0:
                     return true;
-//                case 999:
-//                    break searchLoop;
             }
-//            searchData.printVariables();
         }
-
+        
         searchData.eval(left);
-//        searchData.printVariables();
-
         searchData.eval(right);
-//        searchData.printVariables();
-
-//        System.out.println("left = " + left + " right = " + right);
 
         // negMin과 rightMin 비교
         searchData.compareWithGlobal();
