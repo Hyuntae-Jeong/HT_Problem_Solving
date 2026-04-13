@@ -29,19 +29,8 @@ class Main {
         students = new Student[N + 1];
         getInput();
 //        printInput();
-        BFSMethod();
-    }
-
-    static void printInput() {
-        for (int i = 1; i <= N; i++) {
-            System.out.println("=== student " + i + " ===");
-            System.out.println("incoming count: " + students[i].incomingCount);
-            Iterator<Integer> it = students[i].nextStudents.iterator();
-
-            while (it.hasNext()) {
-                System.out.println("next: " + it.next());
-            }
-        }
+//        BFSMethod();
+        DFSMethod();
     }
 
     static void getInput() throws IOException {
@@ -54,6 +43,18 @@ class Main {
 
             students[a].nextStudents.add(b);
             students[b].incomingCount++;
+        }
+    }
+
+    static void printInput() {
+        for (int i = 1; i <= N; i++) {
+            System.out.println("=== student " + i + " ===");
+            System.out.println("incoming count: " + students[i].incomingCount);
+            Iterator<Integer> it = students[i].nextStudents.iterator();
+
+            while (it.hasNext()) {
+                System.out.println("next: " + it.next());
+            }
         }
     }
 
@@ -86,5 +87,30 @@ class Main {
         System.out.print(sb);
     }
 
-    static void DFSMethod() {}
+    static ArrayList<Integer> DFSList;
+    static void DFSMethod() {
+        DFSList = new ArrayList<>(N);
+        for (int i = 1; i <= N; i++) {
+            if (!students[i].isVisited) {
+                DFS(i);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = N - 1; i >= 0; i--){
+            sb.append(DFSList.get(i)).append(" ");
+        }
+        System.out.print(sb);
+    }
+
+    static void DFS(int cur) {
+        for (Integer next : students[cur].nextStudents) {
+            if (!students[next].isVisited) {
+                DFS(next);
+            }
+        }
+
+        DFSList.add(cur);
+        students[cur].isVisited = true;
+    }
 }
